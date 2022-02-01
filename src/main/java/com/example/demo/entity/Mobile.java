@@ -20,8 +20,12 @@ public class Mobile {
 	@NotBlank
 	String mob1;
 	
+	@Size(max=15)
+	@Pattern(regexp = "^[0-9]+$")
 	String mob2;
 	
+	@Size(max=15)
+	@Pattern(regexp = "^[0-9]+$")
 	String mob3;
 	
 	@OneToOne(mappedBy = "mobile")
