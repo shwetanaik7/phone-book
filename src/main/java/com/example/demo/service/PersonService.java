@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,10 @@ public class PersonService {
 
 	public void deleteContact(Integer id) {
 		personRepository.deleteById(id);
+	}
+
+	public Optional<Person> getContacts(Integer id) {
+		return personRepository.findById(id);
 	}
 
 }

@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,11 @@ public class PersonController {
 		return personService.getContact();
 	}
 	
+	@GetMapping("/display/{id}")
+	Optional<Person> getContacts(@PathVariable("id") Integer id) {
+		return personService.getContacts(id);
+	}
+	
 	@DeleteMapping("/delete/{id}")
 	void deleteContact(@PathVariable("id") Integer id)
 	{
@@ -38,11 +45,14 @@ public class PersonController {
 	@PutMapping("/edit/{id}")
 	public ResponseEntity<Person> updateContact(@PathVariable("id") Integer id, @RequestBody Person person) {
 		Person contact = personRepository.findById(id).get();
-		if(contact.getfName()!=null) {
-	        contact.setfName(person.getfName());
-	        contact.setlName(person.getlName());
+		if(contact.getFirstName()!=null) {
+	        contact.setFirstName(person.getFirstName());
+	        contact.setLastName(person.getLastName());
 	        contact.setAge(person.getAge());
-	        contact.setAddress(person.getAddress());
+	        contact.setHouse_no(person.getHouse_no());
+	        contact.setCity(person.getCity());
+	        contact.setStreet(person.getStreet());
+	        contact.setPin(person.getPin());
 	        contact.setMobile(person.getMobile());
 	      }
 	  return new ResponseEntity<Person>(personRepository.save(contact),HttpStatus.OK);
